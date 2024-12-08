@@ -1,0 +1,36 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+char* reverse( char str1[]) ;
+
+int main() {
+    char text[50] = "I Love You" ;
+    char *out ;
+    out = reverse(text) ;
+    printf( "%s\n", out) ;
+
+    free(out) ;
+    return 0 ;
+
+}//end main
+
+char *reverse(char str1[]) {
+    int length = 0 ;
+    int i = 0 ;
+
+    while(str1[length] != '\0' ) {
+        length++ ;
+    }
+    char *str2 = (char *)malloc((length + 1) * sizeof(char)) ; 
+    if (str2 == NULL) {  // ตรวจสอบว่าการจองหน่วยความจำสำเร็จหรือไม่
+        exit(1);  // ออกจากโปรแกรมหากการจองหน่วยความจำล้มเหลว
+    }
+    for( i = 0 ; i < length ; i++ ) {
+        str2[i] = str1[length - i - 1 ] ;
+    }
+    str2[length] = '\0' ;
+
+    return str2 ;
+    
+}//end function reverse
