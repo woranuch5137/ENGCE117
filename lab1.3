@@ -1,0 +1,36 @@
+#include <stdio.h>
+#include <stdlib.h>  // สำหรับการจัดสรรหน่วยความจำ
+
+
+int *GetSet( int *num ) { //รับข้อมูลจำนวนสมาชิกและค่าในเซต
+    
+    printf("Enter the number of elements: "); // รับจำนวนสมาชิกในเซต
+    scanf("%d", num);
+
+    int *data = (int *)malloc(*num * sizeof(int)) ; //จัดสรรหน่วยความจำให้กับอาเรย์
+    if (data == NULL) {
+        exit(1);  // หากไม่สามารถจัดสรรหน่วยความจำได้
+    }// end if
+
+    printf("Enter the elements: "); // รับค่าจากผู้ใช้
+    for (int i = 0; i < *num; i++) {
+        scanf("%d", &data[i]);
+    }// end for
+    
+    printf( "Number of elements :\n" ) ; //แสดงค่าที่รับเข้ามา(output)
+    for (int i = 0; i < *num; i++) {
+        printf("%d ", data[i]);
+    }// end for
+    printf("\n");
+
+    free(data);// ปล่อยหน่วยความจำ
+
+    return data ;
+
+}// end fucntion getset
+
+int main() {
+    int *data, num;
+    data = GetSet(&num); // เรียกใช้ฟังก์ชัน GetSet
+    return 0;
+}// end main
