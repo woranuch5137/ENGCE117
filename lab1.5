@@ -1,0 +1,52 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+void GetMatrix( int value[], int *row, int *col ) ;
+
+void GetMatrix( int value[], int *row, int *col ) {
+
+    printf( "Enter the number of rows: " ) ; // รับจำนวนแถว
+    scanf( "%d", row ) ;
+    if( *row <= 0 ) {
+        printf("(empty)\n") ;
+        exit(1) ;
+    }// end if *row
+    printf( "Enter the number of columns: ") ; // รับจำนวนคอลัมน์
+    scanf( "%d", col ) ;
+    if( *col <= 0 ) {
+        printf( "(empty)\n") ;
+        exit(1) ;
+    }// end if *col
+    
+    value = (int *) malloc ( (*row) * (*col) * sizeof(int) ) ; // จองหน่วยความจำสำหรับเมทริกซ์
+    if ( value == NULL) {
+        exit(1);  // หากไม่สามารถจัดสรรหน่วยความจำได้
+    }// end if
+    
+    printf( "Enter the matrix elements:\n" ) ; // รับค่าของสมาชิกในเมทริกซ์
+    for (int i = 0 ; i < *row ; i++ ) {
+        for ( int j = 0 ; j < *col ; j++ ) {
+            printf( "Enter the elements: (%d, %d): ", i + 1, j + 1 ) ;
+            scanf( "%d", &value[i * (*col) + j] ) ;
+        } //end for
+    } //end for
+    printf( "\nMatrix: \n" ) ; // แสดงผลเมทริกซ์ที่ได้รับ
+    for ( int i = 0 ; i < *row ; i++ ) {
+        for ( int j = 0 ; j < *col ; j++ ) {
+            printf( "%d ", value [i * (*col) + j] ) ;
+        } //end for
+        printf( "\n" ) ;
+    } //end for
+    
+    free( value ) ; // ปล่อยหน่วยความจำ
+
+} //end void
+
+int main() {
+
+    int *data, m, n ;
+    GetMatrix( data, &m, &n ) ;
+    return 0;
+
+} //end main
+
