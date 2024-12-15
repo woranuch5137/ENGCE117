@@ -1,0 +1,60 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int* GetMatrix( int *row, int *col ) ; //ฟังก์ชั่นที่จะคืนค่าไปยังเมทริกซ์
+
+int main() {
+
+    int *data, m, n ;
+    
+    data = GetMatrix( &m, &n ) ; //เรียกฟังก์ชั่นgetmatrix เพื่อรับข้อมูลเมทริกซ์
+
+    printf( "Enter number of rows and colums: %d %d\n", m, n ) ; //แสดงค่าเอาท์พุต
+    printf( "Enter matrix element:\n" ) ;
+    for ( int i = 0 ; i < m ; i++ ) {
+        for ( int j = 0 ; j < n ; j++ ) {
+            printf( "%d ", data [ i * n + j ] ) ;
+        } //end for
+        printf( "\n" ) ;
+    } //end for
+    
+    free( data ) ; //ปล่อยหน่วยความจำ
+
+    return 0 ;
+
+}// end function
+
+int* GetMatrix( int *row, int *col ) { //ฟังก์ชั่นที่รับจำนวนแถวและคอลัมน์แล้วคืนค่าชี้ไปที่เมทริกซ์
+    int *data ;
+
+    printf( "Enter the number of rows: " ) ; // รับจำนวนแถว
+    scanf( "%d", row ) ;
+    if( *row <= 0 ) {
+        printf( "(empty)\n" ) ;
+        exit( 1 ) ;
+    }// end if *row
+    printf( "Enter the number of columns: " ) ; // รับจำนวนคอลัมน์
+    scanf( "%d", col ) ;
+    if( *col <= 0 ) {
+        printf( "(empty)\n" ) ;
+        exit(1) ;
+    }// end if *col
+
+    data = ( int * )malloc(  (*row ) * ( *col ) * sizeof(int) ) ; // จองหน่วยความจำสำหรับเมทริกซ์
+    if ( data == NULL) {
+        exit( 1 ) ;  // หากไม่สามารถจัดสรรหน่วยความจำได้
+    }// end if
+
+    printf( "Enter matrix elements:\n" ) ; // รับค่าของสมาชิกในเมทริกซ์จากผู้ใช้
+    for ( int i = 0 ; i < *row ; i++ ) {
+        for ( int j = 0 ; j < *col ; j++ ) {
+            printf( "Enter the elements: " ) ;
+            scanf( "%d", &data[i * (*col) + j] ) ;
+        } //end for
+    } //end for
+    
+    return data ; //คืนค่าไปยังหน่วยความจำ
+    
+} // end function GetMatrix
+
+
