@@ -1,0 +1,28 @@
+#include <stdio.h>
+
+struct student {
+    char name[ 20 ] ;
+    int age ;
+    char sex ;
+    float gpa ;
+} ; //end struct
+
+void upgrade( struct student *child ) ; // ใช้ pointer เพื่อแก้ไขข้อมูลภายนอก
+
+int main() {
+    struct student aboy ;
+    aboy.sex = 'F' ;
+    aboy.gpa = 2.58 ;
+    upgrade( &aboy ) ; // ส่ง address (pointer) ของ aboy ไปยังฟังก์ชัน upgrade
+    printf( "%.2f\n", aboy.gpa ) ; // แสดงค่า gpa ที่เพิ่มขึ้นหลังจากเรียก upgrade
+    return 0 ;
+} //end main
+
+void upgrade( struct student *child ) {
+    
+    if ( child -> sex == 'M' ) { // เช็คเพศ
+        child -> gpa *= 1.10 ; // เพิ่ม gpa ขึ้น 10% สำหรับ 'M'
+    } else if ( child -> sex == 'F' ) { //เช็คเพศ
+        child -> gpa *= 1.20 ; // เพิ่ม gpa ขึ้น 20% สำหรับ 'F'
+    } //end if
+} //end function void
