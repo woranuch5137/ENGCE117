@@ -1,0 +1,51 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+
+struct student {
+    char name[20] ;
+    int age ;
+}; //end struct
+
+struct student (*GetStudent( int *room ) )[ 10 ] ;
+
+int main() {
+    struct student ( *children )[ 10 ] ;
+    int group ;
+    children = GetStudent( &group ) ; //เรียกใช้ฟังก์ชั่นเพื่อรับข้อมูล
+
+    for( int r = 0 ; r < group ; r++ ) { //แสดงเอาท์พุต
+        printf( "Room %d:\n", r + 1 ) ; 
+        for( int R = 0 ; R < 10 ; R++ ) {
+            printf( "Student %d: %s, Age: %d\n", R + 1, children[r][R].name, children[r][R].age) ;
+        } //end for
+    }//end for
+
+    printf( "\n\n" ) ;
+    for( int r = 0 ; r < group ; r++ ) { //แสดงเอาท์พุต
+        printf( "Room %d: 10 students entered.\n", r + 1 ) ;
+    }//end foy
+
+    free( children ) ;
+
+    return 0 ;
+}//end function
+
+struct student(*GetStudent(int *room))[10] { //รับข้อมูลจำนวนห้องและนักเรียน
+    printf( "Enter the number of room : " ) ;
+    scanf( "%d", room ) ;
+
+    struct student(*students)[10] = (struct student(*)[10])malloc(*room * sizeof(*students)); //จัดสรรหน่วยความจำห้องเรียนและนักเรียน
+
+    for( int r = 0 ; r < *room ; r++ ) { //รับข้อมูลนักเรียน
+        printf( "Room %d:\n", r + 1 ) ;
+        for (int R = 0 ; R < 10 ; R++ ) {
+            printf( "Student %d Name : ", R + 1 ) ;
+            scanf( "%s", students[r][R].name ) ;
+            printf( "Age : " ) ;
+            scanf( "%d", &students[r][R].age ) ;
+        }//end for
+    }//end for
+
+    return students ; //คืนค่า
+}//end struct
