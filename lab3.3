@@ -1,0 +1,28 @@
+#include <stdio.h>
+
+struct student {
+    char name[ 20 ] ;
+    int age ;
+    char sex ;
+    float gpa ;
+} ;
+
+struct student upgrade( struct student child ) ; //ฟังก์ชันทำงานกับสำเนาของตัวแปร aboy (ไม่ต้องการเปลี่ยนแปลงข้อมูลต้นฉบับหรือไม่ต้องการแก้ไขค่าของตัวแปรที่ส่งเข้าไป)
+
+int main() {
+    struct student aboy ;
+    aboy.sex = 'M' ;
+    aboy.gpa = 3.00 ;
+    aboy = upgrade( aboy ) ; //ไม่ได้รับที่อยู่ &aboyส่งค่าของ aboy ไปเลย
+    printf( "%.2f", aboy.gpa ) ; //แสดงค่า gpa ที่เพิ่มขึ้น
+    return 0 ;
+} //end main
+
+struct student upgrade( struct student child ) { //ไม่ได้ส่งผลต่อ aboy ใน main จนกว่าจะมีการส่งกลับค่าผ่าน return child
+    if( child.sex == 'M' ) { //เช็คเพศ
+        child.gpa *= 1.10 ; //เพิ่ม gpa 10% สำหรับ'M'
+    } else if( child.sex == 'F' ) { //เช็็คเพศ
+        child.gpa *= 1.20 ; //เพิ่มgpa 10% สำหรับ 'F'
+    } // end if
+    return child ; //ส่งคืนค่ากลับ
+} // end function struct
