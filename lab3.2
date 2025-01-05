@@ -1,0 +1,30 @@
+#include <stdio.h>
+
+struct student 
+{
+    char name[ 20 ] ;
+    int age ;
+    char sex ;
+    float gpa ;
+} ;
+
+void upgrade( struct student *child ) ; //ใช้ pointer ส่งผลไปที่ aboy ใน main
+
+int main() {
+    struct student aboy ;
+    aboy.sex = 'M' ;
+    aboy.gpa = 3.00 ;
+    upgrade( &aboy ) ; //ส่งที่อยู่ * ของaboy ไปฟังกืชั่น upgrade
+    printf( "%.2f", aboy.gpa ) ; //แสดงค่า gpa ที่เพิ่มขึ้นจาก upgrade
+    return 0 ;
+} //end function
+
+void upgrade( struct student *child ) {
+
+    if( child -> sex == 'M' ) { //เช็คเพศ
+        child -> gpa *= 1.10 ; //เพิ่ม gpa 10% สำหรับ 'M'
+    } else if( child -> sex == 'F' ) { //เช็คเพศ
+        child -> gpa *= 1.20 ; //เพิ่ม gpa 20% สำหรับ 'F'
+    } // end if 
+    
+} //end function void
