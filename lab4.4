@@ -1,0 +1,58 @@
+
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+struct studentNode {
+    char name[ 20 ] ;
+    int age ;
+    char sex ;
+    float gpa ;
+    struct studentNode *Next ;
+} ;
+
+void saveNode( struct studentNode *child, char n[], int a, char s, float g ) ;
+void GoNext1( struct studentNode **walk ) ; //รับพอน์เตอร์ของพอยน์เตอร์เพื่อแก้ไขการชี้ไปที่โหนดถัดไป
+
+int main() {
+    struct studentNode *start, *now1, **now2 ; //ใช้ malloc แทน new ในภาษาซี
+    start = (struct studentNode *)malloc(sizeof(struct studentNode)) ;
+    saveNode( start, "one", 6, 'M', 3.11 ) ;
+
+    start -> Next = (struct studentNode *)malloc(sizeof(struct studentNode)) ; //สร้างโหนดถัดไป
+    saveNode( start -> Next, "two", 8, 'F', 3.22 ) ;
+
+    start -> Next -> Next = (struct studentNode *)malloc(sizeof(struct studentNode)) ; //สร้างโหนดถัดไป
+    saveNode( start -> Next -> Next, "three", 10, 'M', 3.33 ) ;
+
+    start -> Next -> Next -> Next = (struct studentNode *)malloc(sizeof(struct studentNode)) ; //สร้างโหนดถัดไป
+    saveNode( start -> Next -> Next -> Next, "four", 12, 'F', 3.44 ) ;
+
+    now1 = start ; //เริ่มต้นที่โหนดแรก
+    now2 = &start ;
+
+    GoNext1( &now1 ) ; //ใช้ &now1 เพื่อเปลี่ยนแปลงที่อยู่ของ now1
+    printf( "%s ", now1 -> name ) ;
+
+    free(start->Next->Next->Next);  // ปล่อยหน่วยความจำ
+    free(start->Next->Next);
+    free(start->Next);
+    free(start);
+
+    return 0 ;
+} //end main
+
+void saveNode( struct studentNode *child, char n[], int a, char s, float g ) { //ใช้ในการกำหนดค่าของโหนด
+    strcpy( child -> name, n ) ; 
+    child -> age = a ;
+    child -> sex = s ;
+    child -> gpa = g ;
+    child -> Next = NULL;  // ตั้งค่า next ให้เป็น NULL เมื่อสร้างโหนด
+}// end function
+
+void GoNext1(struct studentNode **walk) { //ทำการย้ายไปยังโหนดถัดไป
+    if (*walk != NULL && (*walk)->Next != NULL) {
+        *walk = (*walk)->Next;  // เปลี่ยนการชี้ไปที่โหนดถัดไป
+    }//end if
+}// end function
+
