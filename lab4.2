@@ -1,15 +1,12 @@
 #include <stdio.h>
-#include <stdlib.h>
 
 void go( int ***p, int **z ) ;
 
 int main() {
 
-    int *b = (int *)malloc(sizeof(int)) ; //จัดสรรหน่วยความจำ b
-    *b = 10 ;
-    int *c = (int *)malloc(sizeof(int)) ; //จัดสรรหน่วยความจำ c
-    *c = 20 ;
-
+    int *b = new int ; *b = 10 ;//จัดสรรหน่วยความจำ b
+    int *c = new int ; *c = 20 ;//จัดสรรหน่วยความจำ c
+    
     int **a ; //ตัวแปร a ต้องชี้ไปยังตัวแปร int*
 
     go( &a, &b ) ; //เรียกใช้ฟังก์ชั่น go เพื่อให้ a ชี้ไปที่ b
@@ -17,8 +14,6 @@ int main() {
     go( &a, &c ) ; //เรียกใช้ฟังก์ชั่น go เพื่อให้ a ชี้ไปที่ c
     printf( "%d %p %p %p\n", **a, *a, a, &a ) ; 
 
-    free( b ) ; //ปล่อยหน่วยความจำ
-    free( c ) ;
 
     return 0 ;
 } //end main
