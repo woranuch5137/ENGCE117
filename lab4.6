@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
 
 struct studentNode {
@@ -45,7 +44,7 @@ void SaveNode( struct studentNode *child, char n[], int a, char s, float g ) {
 }//end function
 
 void GoNext2( struct studentNode ***walk ) {
-    if( *walk && (*walk)[0]->Next ) {
-        *walk = &((*walk)[0]->Next ) ; //เปลี่ยนไปชี้ที่โหนดถัดไป
+    if( **walk != NULL ) {
+        **walk = (**walk)->Next  ; //เปลี่ยนไปชี้ที่โหนดถัดไป
     }//end if
 }//end function
