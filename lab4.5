@@ -1,7 +1,5 @@
-
 #include <stdio.h>
 #include <string.h>
-#include <stdlib.h>
 
 struct studentNode {
     char name[ 20 ] ;
@@ -15,17 +13,17 @@ void SaveNode( struct studentNode *child, char n[], int a, char s, float g ) ;
 void GoNext2( struct studentNode **walk ) ; //รับพอน์เตอร์ของพอยน์เตอร์เพื่อแก้ไขการชี้ไปที่โหนดถัดไป
 
 int main() {
-    struct studentNode *start, *now1, **now2 ; //ใช้ malloc แทน new ในภาษาซี
-    start = (struct studentNode *)malloc(sizeof(struct studentNode)) ;
+    struct studentNode *start, *now1, **now2 ; //สร้างโหนดแรก
+    start = new struct studentNode ;
     SaveNode( start, "one", 6, 'M', 3.11 ) ;
 
-    start -> Next = (struct studentNode *)malloc(sizeof(struct studentNode)) ; //สร้างโหนดถัดไป
+    start -> Next = new struct studentNode ; //สร้างโหนดถัดไป
     SaveNode( start -> Next, "two", 8, 'F', 3.22 ) ;
 
-    start -> Next -> Next = (struct studentNode *)malloc(sizeof(struct studentNode)) ; //สร้างโหนดถัดไป
+    start -> Next -> Next = new struct studentNode ; //สร้างโหนดถัดไป
     SaveNode( start -> Next -> Next, "three", 10, 'M', 3.33 ) ;
 
-    start -> Next -> Next -> Next = (struct studentNode *)malloc(sizeof(struct studentNode)) ; //สร้างโหนดถัดไป
+    start -> Next -> Next -> Next = new struct studentNode ; //สร้างโหนดถัดไป
     SaveNode( start -> Next -> Next -> Next, "four", 12, 'F', 3.44 ) ;
 
     now1 = start ; 
@@ -33,11 +31,6 @@ int main() {
 
     GoNext2( now2 ) ; //ส่งพอยน์เตอร์ของพอยน์เตอร์ now2 ใหเฟังก์ชั่น
     printf( "%s ", (*now2) -> name ) ;
-
-    free(start->Next->Next->Next);  // ปล่อยหน่วยความจำ
-    free(start->Next->Next);
-    free(start->Next);
-    free(start);
 
     return 0 ;
 } //end main
